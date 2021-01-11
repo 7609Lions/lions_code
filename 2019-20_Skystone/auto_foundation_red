@@ -1,0 +1,101 @@
+ public void autoFoundationRed() throws InterruptedException {
+
+       double TimePerMM = 0.0248;
+       double TimePerDegree = 0.01744444444;
+
+       // Write autoCode here
+
+       // Set Toes to starting position
+       servoFoundationL.setPosition(.5);
+       servoFoundationR.setPosition(9);
+
+       // Set Claw to starting position
+       servoGrab.setPosition(.8);
+       servoRotate.setPosition(.7);
+
+       // Move forward 100 CM
+       forward();
+       Thread.sleep(2480);
+       pauseMotor();
+       Thread.sleep(100);
+
+       // Connect to foundation
+       servoFoundationL.setPosition(.1);
+       servoFoundationR.setPosition(.5);
+       Thread.sleep(500);
+       pauseMotor();
+       Thread.sleep(100);
+
+       // Pull foundation backwards
+       fullBackward();
+       Thread.sleep(850);
+       pauseMotor();
+       Thread.sleep(100);
+
+       // Let go of foundation
+       servoFoundationL.setPosition(.5);
+       servoFoundationR.setPosition(.9);
+       pauseMotor();
+       Thread.sleep(500);
+
+       // Move away from foundation
+       backward();
+       Thread.sleep(150);
+       pauseMotor();
+       Thread.sleep(100);
+
+       // Get out of way of foundation
+       rotateRight90();
+
+       backward();
+       Thread.sleep(1200);
+       pauseMotor();
+       Thread.sleep(100);
+
+       rotateRight();
+       Thread.sleep(975);
+       pauseMotor();
+       Thread.sleep(100);
+
+       // Back up to get behind foundation
+       backward();
+       Thread.sleep(2260);
+       pauseMotor();
+       Thread.sleep(100);
+
+       //Face foundation
+       rotateLeft90();
+
+       forward();
+       Thread.sleep(1300);
+       pauseMotor();
+       Thread.sleep(100);
+
+       rotateRight90();
+
+       // Push foundation into area
+       motorRight.setPower(fullPower);
+       motorLeft.setPower(fullPower);
+       Thread.sleep(830);
+
+       // Move away from foundation
+       backward();
+       Thread.sleep(300);
+       pauseMotor();
+       Thread.sleep(100);
+
+       // Face bridge
+       rotateRight90();
+
+       // Move arm out of the way in order to park under bridge
+       moveArm();
+       Thread.sleep(500);
+       pauseMotor();
+       Thread.sleep(500);
+
+       forward();
+       Thread.sleep(2736);
+
+   }
+
+}
