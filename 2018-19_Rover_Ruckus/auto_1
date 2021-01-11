@@ -1,0 +1,155 @@
+package org.firstinspires.ftc.teamcode;
+
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+
+
+@Autonomous(name = "AutoCode2", group = "Code")
+public class AutoCode2 extends LinearOpMode {
+   public DcMotor motorLeftFront;
+   public DcMotor motorRightFront;
+   public DcMotor motorLeftBack;
+   public DcMotor motorRightBack;
+   public DcMotor motorLeftArm;
+   public DcMotor motorRightArm;
+   public DcMotor motorExtension;
+   public DcMotor motorHang;
+   public CRServo leftCollector;
+   public CRServo rightCollector;
+
+
+   private static double fullPower = 1.0;
+   private static double fullRange = 1.0;
+   private static double power = .9;
+
+   @Override
+   public void runOpMode() throws InterruptedException {
+       //Exception catch
+       motorLeftFront = hardwareMap.dcMotor.get("motorLeftFront");
+       motorRightFront = hardwareMap.dcMotor.get("motorRightFront");
+       motorLeftBack = hardwareMap.dcMotor.get("motorLeftBack");
+       motorRightBack = hardwareMap.dcMotor.get("motorRightBack");
+       motorLeftArm = hardwareMap.dcMotor.get("motorLeftArm");
+       motorRightArm = hardwareMap.dcMotor.get("motorRightArm");
+       motorExtension = hardwareMap.dcMotor.get("motorExtension");
+       motorHang = hardwareMap.dcMotor.get("motorHang");
+       leftCollector = hardwareMap.crservo.get("leftCollector");
+       rightCollector = hardwareMap.crservo.get("rightCollector");
+
+       motorLeftFront.setDirection(DcMotor.Direction.REVERSE);
+       motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+
+
+       waitForStart();
+
+       dropDown();
+       drive();
+
+   }
+
+   public void dropDown() throws InterruptedException {
+       motorHang.setPower(fullPower);
+       Thread.sleep(5300);
+       motorHang.setPower(0);
+       Thread.sleep(2000);
+   }
+
+   public void drive() throws InterruptedException {
+
+       rotateLeft();
+//Get out of hang hook
+       Thread.sleep(1500);
+       stop();
+       Thread.sleep(500);
+       strafeLeft();
+//Move out the way
+       Thread.sleep(1000);
+       stop();
+       Thread.sleep(500);
+       rotateRight();
+//Straighten out
+       Thread.sleep(1500);
+       stop();
+       Thread.sleep(500);
+       forward();
+//Move to depot
+       Thread.sleep(1000);
+       stop();
+       Thread.sleep(500);
+//Make code to drop screw
+   }
+
+   public void stop() throws InterruptedException {
+       motorLeftFront.setPower(0);
+       motorLeftBack.setPower(0);
+       motorRightFront.setPower(0);
+       motorRightBack.setPower(0);
+   }
+
+   public void forward() throws InterruptedException {
+       motorLeftFront.setPower(-fullPower * .5);
+       motorLeftBack.setPower(fullPower * .5);
+       motorRightFront.setPower(fullPower * .5);
+       motorRightBack.setPower(-fullPower * .5);
+
+   }
+
+   public void backward() throws InterruptedException {
+       motorLeftFront.setPower(fullPower * .5);
+       motorLeftBack.setPower(-fullPower * .5);
+       motorRightFront.setPower(-fullPower * .5);
+       motorRightBack.setPower(fullPower * .5);
+
+   }
+
+   public void rotateRight() throws InterruptedException {
+       motorLeftFront.setPower(fullPower * .5);
+       motorLeftBack.setPower(-fullPower * .5);
+       motorRightFront.setPower(fullPower * .5);
+       motorRightBack.setPower(-fullPower * .5);
+
+   }
+
+   public void spinRight() throws InterruptedException {
+       motorLeftFront.setPower(fullPower * .5);
+       motorLeftBack.setPower(fullPower * .5);
+       motorRightFront.setPower(-fullPower * .5);
+       motorRightBack.setPower(-fullPower * .5);
+
+   }
+
+   public void strafeRight() throws InterruptedException {
+       motorLeftFront.setPower(-fullPower * .5);
+       motorLeftBack.setPower(-fullPower * .5);
+       motorRightFront.setPower(-fullPower * .5);
+       motorRightBack.setPower(-fullPower * .5);
+
+   }
+
+   public void rotateLeft() throws InterruptedException {
+       motorLeftFront.setPower(-fullPower * .5);
+       motorLeftBack.setPower(fullPower * .5);
+       motorRightFront.setPower(-fullPower * .5);
+       motorRightBack.setPower(fullPower * .5);
+
+   }
+
+   public void spinLeft() throws InterruptedException {
+       motorLeftFront.setPower(-fullPower * .5);
+       motorLeftBack.setPower(-fullPower * .5);
+       motorRightFront.setPower(fullPower * .5);
+       motorRightBack.setPower(fullPower * .5);
+
+   }
+
+   public void strafeLeft() throws InterruptedException {
+       motorLeftFront.setPower(fullPower * .5);
+       motorLeftBack.setPower(fullPower * .5);
+       motorRightFront.setPower(fullPower * .5);
+       motorRightBack.setPower(fullPower * .5);
+
+   }
+
+}
